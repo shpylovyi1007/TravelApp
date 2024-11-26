@@ -1,8 +1,9 @@
-import HomeComponent from "../components/HomeComponent/Home";
+import HomeComponent from "../components/HomeComponent/HomeComponent";
+import css from "./Home.module.scss";
 
 const Home = () => {
   return (
-    <div>
+    <div className={css.main}>
       <HomeComponent />
     </div>
   );

@@ -4,11 +4,11 @@ import Home from "../../pages/Home";
 import Catalog from "../../pages/Catalog";
 import Product from "../../pages/Product";
 import NotFound from "../../pages/NotFound";
-import "./App.scss";
+// import css from "./App.module.scss";
 
 function App() {
   return (
-    <>
+    <div>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -16,7 +16,7 @@ function App() {
         <Route path="/catalog/:id" element={<Product />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
