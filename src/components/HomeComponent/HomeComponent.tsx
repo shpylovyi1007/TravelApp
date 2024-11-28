@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import css from "./HomeComponent.module.scss";
 
 const HomeComponent = () => {
@@ -7,7 +8,9 @@ const HomeComponent = () => {
       <p className={css.text}>
         You can find everything you want in our catalog
       </p>
-      <button className={css.button}>View Now</button>
+      <Link to="/catalog" className={css.button}>
+        View Now
+      </Link>
     </div>
   );
 };
