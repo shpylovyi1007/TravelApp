@@ -4,7 +4,6 @@ import Home from "../../pages/Home";
 import Catalog from "../../pages/Catalog";
 import Product from "../../pages/Product";
 import NotFound from "../../pages/NotFound";
-// import css from "./App.module.scss";
 
 function App() {
   return (

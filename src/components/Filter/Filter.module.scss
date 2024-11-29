@@ -1,0 +1,168 @@
+.form {
+  width: 100%;
+}
+
+.locationContainer {
+  position: relative;
+
+  .text {
+    color: #6c717b;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .input {
+    width: 100%;
+    margin-top: 8px;
+    padding: 18px 0;
+    padding-left: 48px;
+    border-radius: 12px;
+    background: #f7f7f7;
+    border: none;
+    outline: none;
+    color: #101828;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .input::placeholder {
+    color: #101828;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .icon {
+    position: absolute;
+    top: 52px;
+    left: 22px;
+  }
+}
+
+.title {
+  margin-top: 40px;
+  color: #475467;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.subTitle {
+  color: #101828;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 32px 0 48px;
+  position: relative;
+}
+
+.subTitle::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: #dadde1;
+  bottom: -24px;
+  left: 0;
+}
+
+.listEquipment {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 360px;
+
+  .item {
+    width: calc((100% - 24px) / 3);
+    display: flex;
+    flex-direction: column;
+    padding: 16px 40px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 12px;
+    border: 1px solid #dadde1;
+    position: relative;
+    color: #101828;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: -0.08px;
+
+    input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+  }
+}
+
+.listType {
+  display: flex;
+  width: 360px;
+  gap: 12px;
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    width: 112px;
+    padding: 16px 32px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 10px;
+    border: 1px solid #dadde1;
+    text-align: center;
+    flex-shrink: 0;
+    color: #101828;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: -0.08px;
+
+    input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+  }
+}
+
+.button {
+  display: flex;
+  width: 166px;
+  padding: 16px 60px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 200px;
+  background: #e44848;
+  color: #fff;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.08px;
+  margin-top: 56px;
+  border: none;
+}
