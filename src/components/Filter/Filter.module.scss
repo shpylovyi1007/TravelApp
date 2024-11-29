@@ -4,6 +4,9 @@
 
 .locationContainer {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
   .text {
     color: #6c717b;
@@ -15,9 +18,8 @@
   }
 
   .input {
-    width: 100%;
-    margin-top: 8px;
-    padding: 18px 0;
+    width: 360px;
+    padding: 18px 20px;
     padding-left: 48px;
     border-radius: 12px;
     background: #f7f7f7;
@@ -29,6 +31,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
+    appearance: none;
   }
 
   .input::placeholder {
@@ -42,7 +45,7 @@
 
   .icon {
     position: absolute;
-    top: 52px;
+    top: 58px;
     left: 22px;
   }
 }
@@ -79,17 +82,18 @@
 }
 
 .listEquipment {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
   gap: 12px;
-  width: 360px;
 
   .item {
     width: calc((100% - 24px) / 3);
     display: flex;
     flex-direction: column;
-    padding: 16px 40px;
+    padding: 16px 0;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     border-radius: 12px;
     border: 1px solid #dadde1;
@@ -115,14 +119,14 @@
 
 .listType {
   display: flex;
-  width: 360px;
+  width: 100%;
   gap: 12px;
 
   .item {
     display: flex;
     flex-direction: column;
-    width: 112px;
-    padding: 16px 32px;
+    width: calc((100% - 24px) / 3);
+    padding: 16px 0;
     justify-content: center;
     align-items: center;
     gap: 8px;

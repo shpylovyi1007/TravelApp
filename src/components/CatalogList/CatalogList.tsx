@@ -22,6 +22,7 @@ export interface ItemType {
   refrigerator: boolean;
   gas: boolean;
   engine: string;
+  form: string;
 }
 
 interface CatalogListProps {

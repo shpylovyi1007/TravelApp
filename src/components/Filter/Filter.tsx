@@ -1,9 +1,10 @@
 import { Field, Form, Formik } from "formik";
 import { useId } from "react";
 import css from "./Filter.module.scss";
+import LocationAutocomplete from "../LocationAutoComplete/LocationAutoComplete";
 
 const Filter = () => {
-  const locationId = useId();
+  // const locationId = useId();
   const equipmentId = useId();
   const vehicleTypeId = useId();
 
@@ -23,7 +24,7 @@ const Filter = () => {
         }}
       >
         <Form className={css.form}>
-          <div className={css.locationContainer}>
+          {/* <div className={css.locationContainer}>
             <label className={css.text} htmlFor={locationId}>
               Location
             </label>
@@ -37,7 +38,9 @@ const Filter = () => {
             <svg className={css.icon} width="20" height="20">
               <use href="/sprite.svg#map" />
             </svg>
-          </div>
+          </div> */}
+
+          <LocationAutocomplete />
 
           <h2 className={css.title}>Filters</h2>
 
@@ -125,7 +128,7 @@ const Filter = () => {
             aria-labelledby={vehicleTypeId}
           >
             <label className={css.item}>
-              <Field type="radio" name="vehicleType" value="van" />
+              <Field type="radio" name="vehicleType" value="panelTruck" />
               <svg width="32" height="32">
                 <use href="/sprite.svg#van" />
               </svg>
@@ -133,7 +136,7 @@ const Filter = () => {
             </label>
 
             <label className={css.item}>
-              <Field type="radio" name="vehicleType" value="integrated" />
+              <Field type="radio" name="vehicleType" value="fullyIntegrated" />
               <svg width="32" height="32">
                 <use href="/sprite.svg#integrated" />
               </svg>
