@@ -2,25 +2,21 @@ import { Field, Form, Formik } from "formik";
 import { useId } from "react";
 import css from "./Filter.module.scss";
 import LocationAutocomplete from "../LocationAutoComplete/LocationAutoComplete";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { setFilter } from "../../redux/slice";
 
 const Filter = () => {
-  // const locationId = useId();
+  const dispatch = useAppDispatch();
+  const currentFilter = useAppSelector((state) => state.filter);
   const equipmentId = useId();
   const vehicleTypeId = useId();
-
-  const categoriesValues = {
-    location: "",
-    equipment: [],
-    vehicleType: "van",
-  };
 
   return (
     <div>
       <Formik
-        initialValues={categoriesValues}
-        onSubmit={(values, action) => {
-          console.log(values);
-          action.resetForm();
+        initialValues={currentFilter}
+        onSubmit={(values) => {
+          dispatch(setFilter(values));
         }}
       >
         <Form className={css.form}>

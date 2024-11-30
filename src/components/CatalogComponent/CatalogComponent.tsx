@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CatalogList, { ItemType } from "../CatalogList/CatalogList";
 import { fetchCampers } from "../campers-api";
 import Filter from "../Filter/Filter";
 import css from "./CatalogComponent.module.scss";
+import { useAppSelector } from "../../redux/store";
 
 const CatalogComponent = () => {
   const [campers, setCampers] = useState<ItemType[]>([]);
@@ -10,25 +11,28 @@ const CatalogComponent = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    const getCatalog = async () => {
-      try {
-        setIsLoading(true);
-        setError(false);
-        const data = await fetchCampers(page);
+  const filter = useAppSelector((state) => state.filter);
 
-        setCampers((prevCampers) => {
-          return [...prevCampers, ...data];
-        });
-      } catch {
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const getCatalog = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      setError(false);
+      const data = await fetchCampers(page);
 
-    getCatalog();
+      setCampers((prevCampers) => {
+        return [...prevCampers, ...data];
+      });
+    } catch {
+      setError(true);
+    } finally {
+      setIsLoading(false);
+    }
   }, [page]);
+
+  useEffect(() => {
+    setPage(1);
+    getCatalog();
+  }, [filter, getCatalog]);
 
   const handleLoadMore = () => {
     setPage(page + 1);
