@@ -37,8 +37,8 @@ const truncateDescription = (text: string, maxLength = 80) => {
 const CatalogList: React.FC<CatalogListProps> = ({ items }) => {
   return (
     <ul className={css.list}>
-      {items.map((item) => (
-        <li key={item.id} className={css.item}>
+      {items.map((item, index) => (
+        <li key={`${item.id}-${index}`} className={css.item}>
           <div
             className={css.img}
             style={{ backgroundImage: `url(${item.gallery[0].thumb})` }}

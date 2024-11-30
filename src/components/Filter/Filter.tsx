@@ -24,22 +24,6 @@ const Filter = () => {
         }}
       >
         <Form className={css.form}>
-          {/* <div className={css.locationContainer}>
-            <label className={css.text} htmlFor={locationId}>
-              Location
-            </label>
-            <Field
-              className={css.input}
-              type="text"
-              name="location"
-              id={locationId}
-              placeholder="Kyiv, Ukraine"
-            />
-            <svg className={css.icon} width="20" height="20">
-              <use href="/sprite.svg#map" />
-            </svg>
-          </div> */}
-
           <LocationAutocomplete />
 
           <h2 className={css.title}>Filters</h2>
