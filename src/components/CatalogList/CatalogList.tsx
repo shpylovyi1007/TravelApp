@@ -53,7 +53,7 @@ const CatalogList: React.FC<CatalogListProps> = ({ items }) => {
 
   const showDetails = (id: string) => {
     dispatch(showMoreCampers(id));
-    navigate(`/catalog/${id}`);
+    navigate(`/campers/${id}`);
   };
 
   return (
