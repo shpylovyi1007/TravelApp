@@ -1,15 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import filterReducer from "./slice";
+import { campersReducer } from "./camperSlice";
 
 export const store = configureStore({
   reducer: {
-    filter: filterReducer,
+    campers: campersReducer,
   },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
-export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

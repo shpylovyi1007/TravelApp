@@ -1,9 +1,13 @@
+.page {
+  padding-bottom: 48px;
+}
+
 .container {
   max-width: 1440px;
   display: flex;
-  justify-content: space-between;
   margin: 0 64px;
   padding-top: 48px;
+  gap: 64px;
 }
 
 .buttonLoad {

@@ -1,6 +1,10 @@
 import React from "react";
 import FeaturesList from "../FeaturesList/FeaturesList";
 import css from "./CatalogList.module.scss";
+import { useDispatch } from "react-redux";
+import { showMoreCampers } from "../../redux/campersOperation";
+import { AppDispatch } from "../../redux/store";
+import { useNavigate } from "react-router-dom";
 
 export interface ItemType {
   id: string;
@@ -8,7 +12,11 @@ export interface ItemType {
   gallery: { thumb: string }[];
   price: number;
   rating: number;
-  reviews: [];
+  reviews: {
+    reviewer_name: string;
+    reviewer_rating: number;
+    comment: string;
+  }[];
   location: string;
   description: string;
   transmission: string;
@@ -23,18 +31,31 @@ export interface ItemType {
   gas: boolean;
   engine: string;
   form: string;
+  length: string;
+  width: string;
+  height: string;
+  tank: string;
+  consumption: string;
 }
 
 interface CatalogListProps {
   items: ItemType[];
 }
 
-const truncateDescription = (text: string, maxLength = 80) => {
+const truncateDescription = (text: string, maxLength = 70) => {
   if (text.length <= maxLength) return text;
   return `${text.slice(0, maxLength)}...`;
 };
 
 const CatalogList: React.FC<CatalogListProps> = ({ items }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  const showDetails = (id: string) => {
+    dispatch(showMoreCampers(id));
+    navigate(`/catalog/${id}`);
+  };
+
   return (
     <ul className={css.list}>
       {items.map((item, index) => (
@@ -76,7 +97,7 @@ const CatalogList: React.FC<CatalogListProps> = ({ items }) => {
               {truncateDescription(item.description)}
             </p>
             <FeaturesList item={item} />
-            <button className={css.button} type="button">
+            <button className={css.button} onClick={() => showDetails(item.id)}>
               Show more
             </button>
           </div>
