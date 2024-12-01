@@ -70,9 +70,11 @@ const CatalogList: React.FC<CatalogListProps> = ({ items }) => {
                 <p>{item.name} </p>
                 <div className={css.price}>
                   <p>&#8364;{item.price}</p>
-                  <svg width="24" height="24">
-                    <use href="/sprite.svg#favorites" />
-                  </svg>
+                  <button className={css.buttonFavorites}>
+                    <svg width="24" height="24">
+                      <use href="/sprite.svg#favorites" />
+                    </svg>
+                  </button>
                 </div>
               </div>
               <div className={css.ratingContaier}>

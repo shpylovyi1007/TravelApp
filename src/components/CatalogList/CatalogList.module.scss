@@ -28,6 +28,19 @@
     .description {
       width: 100%;
 
+      .buttonFavorites {
+        border: none;
+        background: inherit;
+      }
+
+      .buttonFavorites svg {
+        transition: fill 0.3s ease;
+      }
+
+      .active {
+        stroke: gold;
+      }
+
       .name {
         display: flex;
         justify-content: space-between;
