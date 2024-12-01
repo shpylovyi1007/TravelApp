@@ -8,7 +8,7 @@ const HomeComponent = () => {
       <p className={css.text}>
         You can find everything you want in our catalog
       </p>
-      <Link to="/catalog" className={css.button}>
+      <Link to="/campers" className={css.button}>
         View Now
       </Link>
     </div>
