@@ -9,7 +9,7 @@ const activePage = ({ isActive }: { isActive: boolean }) => {
 const Header = () => {
   return (
     <div className={css.header}>
-      <img src="../../../public/logo.png" className={css.logo} />
+      <img src="Logo.png" className={css.logo} />
       <nav className={css.nav}>
         <NavLink className={activePage} to="/">
           Home
