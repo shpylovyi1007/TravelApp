@@ -96,6 +96,19 @@
     font-weight: 600;
     line-height: 1.2;
   }
+  .active {
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: "";
+      height: 4px;
+      width: 100%;
+      background-color: #e44848;
+      bottom: -34px;
+      left: 0;
+    }
+  }
 }
 
 .formContainer {

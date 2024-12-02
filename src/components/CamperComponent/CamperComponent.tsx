@@ -5,6 +5,11 @@ import { NavLink, Outlet, useParams } from "react-router-dom";
 import { showMoreCampers } from "../../redux/campersOperation";
 import css from "./CamperComponent.module.scss";
 import UserForm from "../Form/Form";
+import clsx from "clsx";
+
+const activePage = ({ isActive }: { isActive: boolean }) => {
+  return clsx(css.link, isActive && css.active);
+};
 
 const CamperComponent: React.FC = () => {
   const { currentCamper } = useSelector((state: RootState) => state.campers);
@@ -61,10 +66,10 @@ const CamperComponent: React.FC = () => {
       <p>{currentCamper.description} </p>
 
       <nav className={css.nav}>
-        <NavLink to="features" className={css.link}>
+        <NavLink to="features" className={activePage}>
           Features
         </NavLink>
-        <NavLink to="reviews" className={css.link}>
+        <NavLink to="reviews" className={activePage}>
           Reviews
         </NavLink>
       </nav>
