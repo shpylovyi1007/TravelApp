@@ -1,15 +1,10 @@
 import { useOutletContext } from "react-router-dom";
-import { ItemType } from "../CatalogList/CatalogList";
 import css from "./ReviewsCamper.module.scss";
 
-type ReviewsCamperProps = {
-  currentCamper: ItemType;
-};
+const ReviewsCamper = () => {
+  const { currentCamper } = useOutletContext();
 
-const ReviewsCamper: React.FC = () => {
-  const { currentCamper } = useOutletContext<ReviewsCamperProps>();
-
-  const renderStars = (rating: number) => {
+  const renderStars = (rating) => {
     const stars = [];
     for (let i = 0; i < rating; i++) {
       stars.push(

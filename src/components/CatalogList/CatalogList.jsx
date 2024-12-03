@@ -1,59 +1,22 @@
-import React from "react";
 import FeaturesList from "../FeaturesList/FeaturesList";
 import css from "./CatalogList.module.scss";
+import { getCampersById } from "../../redux/camper/operations";
 import { useDispatch } from "react-redux";
-import { showMoreCampers } from "../../redux/campersOperation";
-import { AppDispatch } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
 
-export interface ItemType {
-  id: string;
-  name: string;
-  gallery: { thumb: string }[];
-  price: number;
-  rating: number;
-  reviews: {
-    reviewer_name: string;
-    reviewer_rating: number;
-    comment: string;
-  }[];
-  location: string;
-  description: string;
-  transmission: string;
-  kitchen: boolean;
-  AC: boolean;
-  TV: boolean;
-  bathroom: boolean;
-  radio: boolean;
-  water: boolean;
-  microwave: boolean;
-  refrigerator: boolean;
-  gas: boolean;
-  engine: string;
-  form: string;
-  length: string;
-  width: string;
-  height: string;
-  tank: string;
-  consumption: string;
-}
-
-interface CatalogListProps {
-  items: ItemType[];
-}
-
-const truncateDescription = (text: string, maxLength = 70) => {
+const truncateDescription = (text, maxLength = 70) => {
   if (text.length <= maxLength) return text;
   return `${text.slice(0, maxLength)}...`;
 };
 
-const CatalogList: React.FC<CatalogListProps> = ({ items }) => {
-  const dispatch = useDispatch<AppDispatch>();
+const CatalogList = ({ items }) => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
-  const showDetails = (id: string) => {
-    dispatch(showMoreCampers(id));
-    navigate(`/campers/${id}`);
+  const handleShowMore = (camperId) => {
+    dispatch(getCampersById(camperId));
+    navigate(`/campers/${camperId}`);
   };
 
   return (
@@ -99,7 +62,10 @@ const CatalogList: React.FC<CatalogListProps> = ({ items }) => {
               {truncateDescription(item.description)}
             </p>
             <FeaturesList item={item} />
-            <button className={css.button} onClick={() => showDetails(item.id)}>
+            <button
+              className={css.button}
+              onClick={() => dispatch(handleShowMore(item.id))}
+            >
               Show more
             </button>
           </div>

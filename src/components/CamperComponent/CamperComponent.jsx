@@ -1,34 +1,27 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import { NavLink, Outlet, useParams } from "react-router-dom";
-import { showMoreCampers } from "../../redux/campersOperation";
+import { NavLink, Outlet } from "react-router-dom";
 import css from "./CamperComponent.module.scss";
 import UserForm from "../Form/Form";
 import clsx from "clsx";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCurrentCamper } from "../../redux/camper/selectors";
+import { useEffect } from "react";
+import { getCampersById } from "../../redux/camper/operations";
 
-const activePage = ({ isActive }: { isActive: boolean }) => {
+const activePage = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
 };
 
-const CamperComponent: React.FC = () => {
-  const { currentCamper } = useSelector((state: RootState) => state.campers);
-  const { id } = useParams<{ id: string }>();
-  const dispatch = useDispatch<AppDispatch>();
+const CamperComponent = () => {
+  const dispatch = useDispatch();
+  const currentCamper = useSelector(selectCurrentCamper);
 
   useEffect(() => {
-    if (id) {
-      dispatch(showMoreCampers(id));
-    }
-  }, [id, dispatch]);
-
-  if (!currentCamper) {
-    return <div>No camper selected</div>;
-  }
+    dispatch(getCampersById(selectCurrentCamper));
+  }, [selectCurrentCamper, dispatch]);
 
   return (
     <div className={css.page}>
-      <p className={css.title}>{currentCamper.name} </p>
+      <p className={css.title}>{currentCamper.name}</p>
 
       <div className={css.ratingContainer}>
         <div className={css.rating}>
@@ -63,7 +56,7 @@ const CamperComponent: React.FC = () => {
         ))}
       </ul>
 
-      <p>{currentCamper.description} </p>
+      <p>{currentCamper.description}</p>
 
       <nav className={css.nav}>
         <NavLink to="features" className={activePage}>

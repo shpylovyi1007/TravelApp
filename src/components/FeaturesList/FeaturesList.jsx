@@ -1,12 +1,7 @@
 import React from "react";
-import { ItemType } from "../CatalogList/CatalogList";
 import css from "./FeaturesList.module.scss";
 
-interface FeaturesListProps {
-  item: ItemType;
-}
-
-const FeaturesList: React.FC<FeaturesListProps> = ({ item }) => {
+const FeaturesList = ({ item }) => {
   return (
     <ul className={css.list}>
       <li className={css.item}>

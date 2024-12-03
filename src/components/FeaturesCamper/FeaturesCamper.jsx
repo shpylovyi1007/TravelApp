@@ -1,13 +1,8 @@
 import { useOutletContext } from "react-router-dom";
-import { ItemType } from "../CatalogList/CatalogList";
 import css from "./FeaturesCamper.module.scss";
 
-type FeaturesCamperProps = {
-  currentCamper: ItemType;
-};
-
-const FeaturesCamper: React.FC = () => {
-  const { currentCamper } = useOutletContext<FeaturesCamperProps>();
+const FeaturesCamper = () => {
+  const { currentCamper } = useOutletContext();
 
   return (
     <div className={css.container}>

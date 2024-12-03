@@ -1,13 +1,8 @@
 import React, { useId, useState } from "react";
-import Select, { SingleValue } from "react-select";
+import Select from "react-select";
 import css from "../Filter/Filter.module.scss";
 
-interface LocationOption {
-  value: string;
-  label: string;
-}
-
-const locationOptions: LocationOption[] = [
+const locationOptions = [
   { value: "Kyiv, Ukraine", label: "Kyiv, Ukraine" },
   { value: "Dnipro, Ukraine", label: "Dnipro, Ukraine" },
   { value: "Odesa, Ukraine", label: "Odesa, Ukraine" },
@@ -17,12 +12,11 @@ const locationOptions: LocationOption[] = [
   { value: "Lviv, Ukraine", label: "Lviv, Ukraine" },
 ];
 
-const LocationAutocomplete: React.FC = () => {
-  const [selectedLocation, setSelectedLocation] =
-    useState<SingleValue<LocationOption>>(null);
+const LocationAutocomplete = () => {
+  const [selectedLocation, setSelectedLocation] = useState(null);
   const locationId = useId();
 
-  const handleLocationChange = (option: SingleValue<LocationOption>) => {
+  const handleLocationChange = (option) => {
     setSelectedLocation(option);
   };
 
