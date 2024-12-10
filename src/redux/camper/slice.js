@@ -1,17 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getCampers, getCampersById } from "./operations";
 
-
-
 const initialState = {
   campers: [],
   currentCamper: {},
-  page: 1,
-  total: 0,
   loading: false,
   error: null,
+  total: 0,
+  page: 1,
 };
-
 
 const handlePending = (state) => {
   state.loading = true;
@@ -20,7 +17,6 @@ const handlePending = (state) => {
 const handleRejected = (state, action) => {
   state.loading = false;
   state.error = action.payload;
-
 };
 
 const campersSlice = createSlice({
@@ -39,7 +35,7 @@ const campersSlice = createSlice({
           state.campers = [...state.campers, ...action.payload.items];
         }
 
-        state.page = currentPage + 1;
+        state.page = currentPage;
         state.total = action.payload.total;
         state.loading = false;
       })

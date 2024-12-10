@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import css from "./CamperComponent.module.scss";
 import UserForm from "../Form/Form";
 import clsx from "clsx";
@@ -14,10 +14,15 @@ const activePage = ({ isActive }) => {
 const CamperComponent = () => {
   const dispatch = useDispatch();
   const currentCamper = useSelector(selectCurrentCamper);
+  const params = useParams();
 
   useEffect(() => {
-    dispatch(getCampersById(selectCurrentCamper));
-  }, [selectCurrentCamper, dispatch]);
+    const camperId = params.id;
+
+    if (camperId) {
+      dispatch(getCampersById(camperId));
+    }
+  }, [dispatch, params.id]);
 
   return (
     <div className={css.page}>
@@ -42,7 +47,7 @@ const CamperComponent = () => {
         </div>
       </div>
 
-      <p className={css.price}>&#8364;{currentCamper.price}</p>
+      <p className={css.price}>&#8364;{currentCamper.price.toFixed(2)}</p>
 
       <ul className={css.listImg}>
         {currentCamper.gallery.map((image, index) => (

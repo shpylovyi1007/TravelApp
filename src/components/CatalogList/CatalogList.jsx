@@ -14,11 +14,6 @@ const CatalogList = ({ items }) => {
 
   const navigate = useNavigate();
 
-  const handleShowMore = (camperId) => {
-    dispatch(getCampersById(camperId));
-    navigate(`/campers/${camperId}`);
-  };
-
   return (
     <ul className={css.list}>
       {items.map((item, index) => (
@@ -64,7 +59,10 @@ const CatalogList = ({ items }) => {
             <FeaturesList item={item} />
             <button
               className={css.button}
-              onClick={() => dispatch(handleShowMore(item.id))}
+              onClick={() => {
+                dispatch(getCampersById(item.id));
+                navigate(`/campers/${item.id}`);
+              }}
             >
               Show more
             </button>
