@@ -15,7 +15,7 @@ const validationSchema = Yup.object({
 });
 
 const notify = () =>
-  toast("Congratulations, your campervan reservation is successful");
+  toast("Congratulations, your camper reservation is successful");
 
 const UserForm = () => {
   const handleSubmit = () => {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import CatalogList from "../CatalogList/CatalogList";
 import css from "./CatalogComponent.module.scss";
 import Filter from "../Filter/Filter";
@@ -21,16 +21,20 @@ const CatalogComponent = () => {
   const currentPage = useSelector(selectCurrentPage);
 
   useEffect(() => {
-    dispatch(getCampers(currentPage));
+    if (currentPage === 1) {
+      dispatch(getCampers(currentPage));
+    }
   }, [dispatch, currentPage]);
 
   const totalPages = Math.ceil(totalCampers / ITEMS_PER_PAGE);
 
-  const handleNextPage = () => {
+  const isLastPage = currentPage >= totalPages;
+
+  const handleNextPage = useCallback(() => {
     if (currentPage < totalPages) {
       dispatch(getCampers(currentPage + 1));
     }
-  };
+  }, [currentPage, totalPages, dispatch]);
 
   return (
     <div className={css.page}>
@@ -39,13 +43,11 @@ const CatalogComponent = () => {
         {isLoading && <p>Is Loading...</p>}
         <CatalogList items={campers} />
       </div>
-      <button
-        onClick={handleNextPage}
-        disabled={currentPage === totalPages}
-        className={css.buttonLoad}
-      >
-        Load More
-      </button>
+      {!isLastPage && (
+        <button onClick={handleNextPage} className={css.buttonLoad}>
+          Load More
+        </button>
+      )}
     </div>
   );
 };

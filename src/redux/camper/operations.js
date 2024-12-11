@@ -10,7 +10,7 @@ export const getCampers = createAsyncThunk(
   async (page, thunkAPI) => {
     const params = new URLSearchParams({
       limit: ITEMS_PER_PAGE,
-      page: page.toString(),
+      page: page,
     });
 
     try {
