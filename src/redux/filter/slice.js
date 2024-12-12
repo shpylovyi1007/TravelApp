@@ -9,8 +9,10 @@ const filtersSlice = createSlice({
   },
   reducers: {
     setFilters: (state, action) => {
-      console.log("Setting filters:", action.payload);
-      return action.payload;
+      return {
+        ...state,
+        ...action.payload,
+      };
     },
     resetFilters: () => ({
       location: "",

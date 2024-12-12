@@ -28,6 +28,7 @@ const campersSlice = createSlice({
         } else {
           state.campers = [...state.campers, ...action.payload.items];
         }
+
         state.page = currentPage;
         state.total = action.payload.total;
         state.loading = false;
