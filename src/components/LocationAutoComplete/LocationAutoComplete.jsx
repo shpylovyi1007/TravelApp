@@ -1,36 +1,30 @@
-import React, { useId, useState } from "react";
+import React from "react";
 import Select from "react-select";
 import css from "../Filter/Filter.module.scss";
 
 const locationOptions = [
-  { value: "Kyiv, Ukraine", label: "Kyiv, Ukraine" },
-  { value: "Dnipro, Ukraine", label: "Dnipro, Ukraine" },
-  { value: "Odesa, Ukraine", label: "Odesa, Ukraine" },
-  { value: "Poltava, Ukraine", label: "Poltava, Ukraine" },
-  { value: "Kharkiv, Ukraine", label: "Kharkiv, Ukraine" },
-  { value: "Sumy, Ukraine", label: "Sumy, Ukraine" },
-  { value: "Lviv, Ukraine", label: "Lviv, Ukraine" },
+  { value: "Ukraine, Kyiv", label: "Kyiv" },
+  { value: "Ukraine, Dnipro", label: "Dnipro" },
+  { value: "Ukraine, Odesa", label: "Odesa" },
+  { value: "Ukraine, Poltava", label: "Poltava" },
+  { value: "Ukraine, Kharkiv", label: "Kharkiv" },
+  { value: "Ukraine, Sumy", label: "Sumy" },
+  { value: "Ukraine, Lviv", label: "Lviv" },
 ];
 
-const LocationAutocomplete = () => {
-  const [selectedLocation, setSelectedLocation] = useState(null);
-  const locationId = useId();
-
-  const handleLocationChange = (option) => {
-    setSelectedLocation(option);
-  };
-
+const LocationAutocomplete = ({ value, onChange }) => {
   return (
     <div className={css.locationContainer}>
-      <label className={css.text} htmlFor={locationId}>
-        Location
-      </label>
+      <label className={css.text}>Location</label>
       <Select
-        inputId={locationId}
         name="location"
         options={locationOptions}
-        onChange={handleLocationChange}
-        value={selectedLocation}
+        onChange={onChange}
+        value={
+          value
+            ? locationOptions.find((option) => option.value === value)
+            : null
+        }
         placeholder="Select a city"
         isClearable
         className={css.input}

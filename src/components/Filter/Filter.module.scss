@@ -32,15 +32,15 @@
     font-weight: 400;
     line-height: 1.5;
     appearance: none;
-  }
 
-  .input::placeholder {
-    color: #101828;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.5;
+    &::placeholder {
+      color: #101828;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.5;
+    }
   }
 
   .icon {
@@ -69,16 +69,16 @@
   line-height: 1.2;
   margin: 32px 0 48px;
   position: relative;
-}
 
-.subTitle::after {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 1px;
-  background-color: #dadde1;
-  bottom: -24px;
-  left: 0;
+  &::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #dadde1;
+    bottom: -24px;
+    left: 0;
+  }
 }
 
 .listEquipment {
@@ -108,6 +108,11 @@
     letter-spacing: -0.08px;
     transition: all 0.3s ease;
 
+    // New styles for selected state
+    &:has(input[type="checkbox"]:checked) {
+      border-color: #2ecc71; // Green border when checkbox is checked
+    }
+
     input[type="checkbox"] {
       position: absolute;
       width: 1px;
@@ -115,7 +120,6 @@
       margin: -1px;
       border: 0;
       padding: 0;
-
       white-space: nowrap;
       clip-path: inset(100%);
       clip: rect(0 0 0 0);
@@ -148,6 +152,12 @@
     font-weight: 500;
     line-height: 1.5;
     letter-spacing: -0.08px;
+    transition: all 0.3s ease;
+
+    // New styles for selected state
+    &:has(input[type="radio"]:checked) {
+      border-color: #2ecc71; // Green border when radio is selected
+    }
 
     input[type="radio"] {
       position: absolute;
@@ -156,7 +166,6 @@
       margin: -1px;
       border: 0;
       padding: 0;
-
       white-space: nowrap;
       clip-path: inset(100%);
       clip: rect(0 0 0 0);

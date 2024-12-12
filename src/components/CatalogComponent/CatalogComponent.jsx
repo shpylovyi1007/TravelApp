@@ -11,6 +11,7 @@ import {
   selectIsLoading,
   selectTotalCampers,
 } from "../../redux/camper/selectors";
+import { selectFilters } from "../../redux/filter/slice";
 
 const CatalogComponent = () => {
   const dispatch = useDispatch();
@@ -19,29 +20,33 @@ const CatalogComponent = () => {
   const error = useSelector(selectError);
   const totalCampers = useSelector(selectTotalCampers);
   const currentPage = useSelector(selectCurrentPage);
-
-  useEffect(() => {
-    if (currentPage === 1) {
-      dispatch(getCampers(currentPage));
-    }
-  }, [dispatch, currentPage]);
+  const currentFilters = useSelector(selectFilters);
 
   const totalPages = Math.ceil(totalCampers / ITEMS_PER_PAGE);
-
   const isLastPage = currentPage >= totalPages;
 
+  useEffect(() => {
+    dispatch(getCampers({ page: currentPage, filters: currentFilters }));
+  }, [dispatch, currentFilters, currentPage]);
+
   const handleNextPage = useCallback(() => {
+    console.log(`Loading next page: ${currentPage + 1}`);
     if (currentPage < totalPages) {
-      dispatch(getCampers(currentPage + 1));
+      dispatch(
+        getCampers({
+          page: currentPage + 1,
+          filters: currentFilters,
+        })
+      );
     }
-  }, [currentPage, totalPages, dispatch]);
+  }, [currentPage, totalPages, dispatch, currentFilters]);
 
   return (
     <div className={css.page}>
       <div className={css.container}>
         <Filter />
         {isLoading && <p>Is Loading...</p>}
-        <CatalogList items={campers} />
+        <CatalogList items={campers.items} />
       </div>
       {!isLastPage && (
         <button onClick={handleNextPage} className={css.buttonLoad}>

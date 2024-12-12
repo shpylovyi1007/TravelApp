@@ -1,43 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const filterSlice = createSlice({
-  name: "filter",
+const filtersSlice = createSlice({
+  name: "filters",
   initialState: {
     location: "",
     equipment: [],
-    vehicleType: "",
-    page: 1,
+    form: "",
   },
   reducers: {
-    setLocation: (state, action) => {
-      state.location = action.payload;
-      state.page = 1;
+    setFilters: (state, action) => {
+      console.log("Setting filters:", action.payload);
+      return action.payload;
     },
-    setEquipment: (state, action) => {
-      state.equipment = action.payload;
-      state.page = 1;
-    },
-    setVehicleType: (state, action) => {
-      state.vehicleType = action.payload;
-      state.page = 1;
-    },
-    setPage: (state, action) => {
-      state.page = action.payload;
-    },
-    resetFilter: () => ({
+    resetFilters: () => ({
       location: "",
       equipment: [],
-      vehicleType: "",
-      page: 1,
+      form: "",
     }),
   },
 });
 
-export const {
-  setLocation,
-  setEquipment,
-  setVehicleType,
-  setPage,
-  resetFilter,
-} = filterSlice.actions;
-export const filterReducer = filterSlice.reducer;
+export const selectFilters = (state) => state.filters;
+
+export const { setFilters, resetFilters } = filtersSlice.actions;
+export const filtersReducer = filtersSlice.reducer;

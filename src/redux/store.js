@@ -12,7 +12,7 @@ import {
 import { campersReducer } from "./camper/slice";
 import storage from "redux-persist/lib/storage";
 import { favoritesReducer } from "./favoritesCamper/slice";
-import { filterReducer } from "./filter/slice";
+import { filtersReducer } from "./filter/slice";
 
 const persistConfig = {
   key: "campers",
@@ -38,7 +38,7 @@ const persistedFavoritesReducer = persistReducer(
 
 const persistedFilterReducer = persistReducer(
   filterPersistConfig,
-  filterReducer
+  filtersReducer
 );
 
 export const store = configureStore({

@@ -7,17 +7,37 @@ export const ITEMS_PER_PAGE = 4;
 
 export const getCampers = createAsyncThunk(
   "campers/getCampers",
-  async (page, thunkAPI) => {
+  async ({ page = 1, filters = {} }, thunkAPI) => {
     const params = new URLSearchParams({
       limit: ITEMS_PER_PAGE,
-      page: page,
+      page,
     });
 
+    if (filters) {
+      if (filters.location) {
+        params.append("location", filters.location);
+      }
+
+      if (filters.form) {
+        params.append("type", filters.form);
+      }
+
+      if (filters.equipment && filters.equipment.length > 0) {
+        filters.equipment.forEach((equip) => {
+          params.append("equipment", equip);
+        });
+      }
+    }
+
     try {
-      const response = await axios.get(`/campers?${params}`);
-      return { ...response.data, page };
+      const response = await axios.get(`/campers?${params.toString()}`);
+      return {
+        items: response.data,
+        page,
+        total: response.headers["x-total-count"] || response.data.length,
+      };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
