@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <div className={css.header}>
       <Link to="/">
-        <img src="../../../public/Logo.png" className={css.logo} alt="Logo" />
+        <img src="/Logo.png" className={css.logo} alt="Logo" />
       </Link>
       <nav className={css.nav}>
         <NavLink className={activePage} to="/">
