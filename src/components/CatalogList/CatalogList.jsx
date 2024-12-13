@@ -21,10 +21,10 @@ const CatalogList = ({ items }) => {
 
   return (
     <ul className={css.list}>
-      {items.map((item, index) => {
+      {items.map((item) => {
         const isFavorite = favoritesCampers.includes(item.id);
         return (
-          <li key={`${item.id}-${index}`} className={css.item}>
+          <li key={item.id} className={css.item}>
             <div
               className={css.img}
               style={{ backgroundImage: `url(${item.gallery[0].thumb})` }}
