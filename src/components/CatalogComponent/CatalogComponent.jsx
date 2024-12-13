@@ -22,18 +22,14 @@ const CatalogComponent = () => {
   const currentPage = useSelector(selectCurrentPage);
   const currentFilters = useSelector(selectFilters);
 
-  const totalPages = Math.ceil(totalCampers.total / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(totalCampers / ITEMS_PER_PAGE);
   const isLastPage = currentPage >= totalPages;
 
   useEffect(() => {
-    console.log(totalCampers.total);
-    console.log(currentPage);
-
     dispatch(getCampers({ page: currentPage, filters: currentFilters }));
   }, [dispatch, currentFilters, currentPage]);
 
   const handleNextPage = useCallback(() => {
-    console.log(`Loading next page: ${currentPage + 1}`);
     if (currentPage < totalPages) {
       dispatch(
         getCampers({

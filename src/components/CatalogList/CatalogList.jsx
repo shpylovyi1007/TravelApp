@@ -70,7 +70,11 @@ const CatalogList = ({ items }) => {
                 {truncateDescription(item.description)}
               </p>
               <FeaturesList item={item} />
-              <Link className={css.button} to={`/campers/${item.id}`}>
+              <Link
+                className={css.button}
+                target="_blank"
+                to={`/campers/${item.id}`}
+              >
                 Show more
               </Link>
             </div>

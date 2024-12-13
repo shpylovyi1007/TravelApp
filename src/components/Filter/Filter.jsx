@@ -6,15 +6,18 @@ import css from "./Filter.module.scss";
 import LocationAutocomplete from "../LocationAutoComplete/LocationAutoComplete";
 import { selectFilters, setFilters } from "../../redux/filter/slice";
 import { getCampers } from "../../redux/camper/operations";
-import { selectTotalCampers } from "../../redux/camper/selectors";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast/headless";
+import { Toaster } from "react-hot-toast";
 
 const Filter = () => {
   const dispatch = useDispatch();
   const currentFilters = useSelector(selectFilters);
   const equipmentId = useId();
   const vehicleTypeId = useId();
-  const totalCampers = useSelector(selectTotalCampers);
+
+  useEffect(() => {
+    dispatch(getCampers({ page: 1, filters: currentFilters }));
+  }, [dispatch, currentFilters]);
 
   const initialValues = {
     location: currentFilters?.location || "",
@@ -28,57 +31,53 @@ const Filter = () => {
     form: currentFilters?.form || "",
   };
 
-  useEffect(() => {
-    dispatch(getCampers({ page: 1, filters: currentFilters }));
-  }, [dispatch, currentFilters]);
+  const handleSubmit = async (values) => {
+    const selectedEquipment = Object.keys(values.equipment)
+      .filter((key) => values.equipment[key])
+      .map((key) => key.toLowerCase());
+
+    const filtersToSubmit = {
+      location: values.location,
+      equipment: selectedEquipment,
+      form: values.form,
+    };
+
+    dispatch(setFilters(filtersToSubmit));
+
+    try {
+      const response = await dispatch(
+        getCampers({ page: 1, filters: filtersToSubmit })
+      ).unwrap();
+
+      if (response.items.total > 0) {
+        toast.success(`Your search found ${response.items.total} campers`, {
+          position: "bottom-center",
+          duration: 3000,
+          padding: "10px",
+          style: { color: "black", fontSize: "24px" },
+        });
+      } else {
+        toast.error("Your search did not find any campers", {
+          position: "bottom-center",
+          duration: 3000,
+          padding: "10px",
+          style: { color: "black", fontSize: "24px" },
+        });
+      }
+    } catch (error) {
+      toast.error("Your search did not find any campers", {
+        position: "bottom-center",
+        duration: 3000,
+        padding: "10px",
+        style: { color: "black", fontSize: "24px" },
+      });
+    }
+  };
 
   return (
     <>
-      <Toaster />;
-      <Formik
-        initialValues={initialValues}
-        onSubmit={async (values) => {
-          const selectedEquipment = Object.keys(values.equipment)
-            .filter((key) => values.equipment[key])
-            .map((key) => key.toLowerCase());
-
-          const filtersToSubmit = {
-            location: values.location,
-            equipment: selectedEquipment,
-            form: values.form,
-          };
-
-          dispatch(setFilters(filtersToSubmit));
-          dispatch(getCampers({ page: 1, filters: filtersToSubmit }));
-
-          try {
-            await dispatch(getCampers({ page: 1, filters: filtersToSubmit }));
-
-            if (totalCampers.total > 0) {
-              toast.success(`Your search found ${totalCampers.total} camper`, {
-                position: "top-center",
-                duration: 3000,
-                padding: "10px",
-                style: { color: "black", fontSize: "24px" },
-              });
-            } else {
-              toast.error(`Your search did not find any campers`, {
-                position: "bottom-center",
-                duration: 3000,
-                padding: "10px",
-                style: { color: "#fff", fontSize: "24px", background: "red" },
-              });
-            }
-          } catch (error) {
-            toast.error(`Error fetching campers: ${error.message}`, {
-              position: "bottom-center",
-              duration: 3000,
-              padding: "10px",
-              style: { color: "#fff", fontSize: "24px", background: "red" },
-            });
-          }
-        }}
-      >
+      <Toaster />
+      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {({ values, setFieldValue }) => (
           <Form className={css.form}>
             <LocationAutocomplete

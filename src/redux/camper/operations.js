@@ -3,7 +3,7 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io";
 
-export const ITEMS_PER_PAGE = 10;
+export const ITEMS_PER_PAGE = 23;
 
 export const getCampers = createAsyncThunk(
   "campers/getCampers",
@@ -48,7 +48,7 @@ export const getCampers = createAsyncThunk(
       return {
         items: response.data,
         page,
-        total: response.data,
+        total: 23,
       };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
