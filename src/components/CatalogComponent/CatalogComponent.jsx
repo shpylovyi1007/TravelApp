@@ -25,9 +25,13 @@ const CatalogComponent = () => {
   const totalPages = Math.ceil(totalCampers / ITEMS_PER_PAGE);
   const isLastPage = currentPage >= totalPages;
 
-  useEffect(() => {
+  const getCampersAction = useCallback(() => {
     dispatch(getCampers({ page: currentPage, filters: currentFilters }));
-  }, [dispatch, currentFilters, currentPage]);
+  }, [dispatch, currentPage, currentFilters]);
+
+  useEffect(() => {
+    getCampersAction();
+  }, [getCampersAction]);
 
   const handleNextPage = useCallback(() => {
     if (currentPage < totalPages) {
@@ -38,14 +42,14 @@ const CatalogComponent = () => {
         })
       );
     }
-  }, [currentPage, totalPages, dispatch, currentFilters]);
+  }, [currentPage, totalPages, currentFilters]);
 
   return (
     <div className={css.page}>
       <div className={css.container}>
         <Filter />
         {isLoading && <p>Is Loading...</p>}
-        <CatalogList items={campers.items} />
+        <CatalogList items={campers} />
       </div>
       {!isLastPage && (
         <button

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Field, Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useId } from "react";
@@ -14,10 +14,6 @@ const Filter = () => {
   const currentFilters = useSelector(selectFilters);
   const equipmentId = useId();
   const vehicleTypeId = useId();
-
-  useEffect(() => {
-    dispatch(getCampers({ page: 1, filters: currentFilters }));
-  }, [dispatch, currentFilters]);
 
   const initialValues = {
     location: currentFilters?.location || "",

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getCampers, getCampersById } from "./operations";
 
 const initialState = {
-  campers: [],
+  items: [],
   currentCamper: {},
   loading: false,
   error: null,
@@ -21,16 +21,24 @@ const campersSlice = createSlice({
         state.error = null;
       })
       .addCase(getCampers.fulfilled, (state, action) => {
-        const currentPage = action.payload.page;
+        const { page, items, total } = action.payload;
 
-        if (currentPage === 1) {
-          state.campers = action.payload.items;
+        if (page === 1) {
+          state.items = items;
         } else {
-          state.campers = [...state.campers, ...action.payload.items];
+          state.items = [...state.items, ...items];
         }
-
-        state.page = currentPage;
-        state.total = action.payload.total;
+        //  if (page === 1) {
+        //    state.items = items;
+        //  } else {
+        //    const uniqueItems = items.filter(
+        //      (newItem) =>
+        //        !state.items.some((existingItem) => existingItem.id === newItem.id)
+        //    );
+        //    state.items = [...state.items, ...uniqueItems];
+        //  }
+        state.page = page;
+        state.total = total;
         state.loading = false;
       })
       .addCase(getCampers.rejected, (state, action) => {
