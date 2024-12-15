@@ -26,17 +26,15 @@ const campersSlice = createSlice({
         if (page === 1) {
           state.items = items;
         } else {
-          state.items = [...state.items, ...items];
+          const newItems = items.filter(
+            (newItem) =>
+              !state.items.some(
+                (existingItem) => existingItem.id === newItem.id
+              )
+          );
+          state.items = [...state.items, ...newItems];
         }
-        //  if (page === 1) {
-        //    state.items = items;
-        //  } else {
-        //    const uniqueItems = items.filter(
-        //      (newItem) =>
-        //        !state.items.some((existingItem) => existingItem.id === newItem.id)
-        //    );
-        //    state.items = [...state.items, ...uniqueItems];
-        //  }
+
         state.page = page;
         state.total = total;
         state.loading = false;

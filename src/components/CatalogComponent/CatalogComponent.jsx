@@ -25,24 +25,18 @@ const CatalogComponent = () => {
   const totalPages = Math.ceil(totalCampers / ITEMS_PER_PAGE);
   const isLastPage = currentPage >= totalPages;
 
-  const getCampersAction = useCallback(() => {
-    dispatch(getCampers({ page: currentPage, filters: currentFilters }));
-  }, [dispatch, currentPage, currentFilters]);
-
   useEffect(() => {
-    getCampersAction();
-  }, [getCampersAction]);
+    dispatch(getCampers({ page: 1, filters: currentFilters }));
+  }, [dispatch, currentFilters]);
 
   const handleNextPage = useCallback(() => {
-    if (currentPage < totalPages) {
-      dispatch(
-        getCampers({
-          page: currentPage + 1,
-          filters: currentFilters,
-        })
-      );
-    }
-  }, [currentPage, totalPages, currentFilters]);
+    dispatch(
+      getCampers({
+        page: currentPage + 1,
+        filters: currentFilters,
+      })
+    );
+  }, [dispatch, currentPage, currentFilters]);
 
   return (
     <div className={css.page}>

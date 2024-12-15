@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const filtersSlice = createSlice({
-  name: "filters",
+  name: "filter",
   initialState: {
     location: "",
     equipment: [],
-    form: "",
+    form: "panelTruck",
   },
   reducers: {
     setFilters: (state, action) => {
@@ -17,12 +17,12 @@ const filtersSlice = createSlice({
     resetFilters: () => ({
       location: "",
       equipment: [],
-      form: "",
+      form: "panelTruck",
     }),
   },
 });
 
-export const selectFilters = (state) => state.filters;
+export const selectFilters = (state) => state.filter;
 
 export const { setFilters, resetFilters } = filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;

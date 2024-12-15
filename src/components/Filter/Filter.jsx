@@ -6,8 +6,7 @@ import css from "./Filter.module.scss";
 import LocationAutocomplete from "../LocationAutoComplete/LocationAutoComplete";
 import { selectFilters, setFilters } from "../../redux/filter/slice";
 import { getCampers } from "../../redux/camper/operations";
-import toast from "react-hot-toast/headless";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -24,7 +23,7 @@ const Filter = () => {
       TV: currentFilters?.equipment?.includes("TV") || false,
       automatic: currentFilters?.equipment?.includes("automatic") || false,
     },
-    form: currentFilters?.form || "",
+    form: currentFilters?.form,
   };
 
   const handleSubmit = async (values) => {
@@ -45,27 +44,18 @@ const Filter = () => {
         getCampers({ page: 1, filters: filtersToSubmit })
       ).unwrap();
 
-      if (response.items.total > 0) {
-        toast.success(`Your search found ${response.items.total} campers`, {
-          position: "bottom-center",
-          duration: 3000,
-          padding: "10px",
-          style: { color: "black", fontSize: "24px" },
-        });
-      } else {
-        toast.error("Your search did not find any campers", {
-          position: "bottom-center",
-          duration: 3000,
-          padding: "10px",
-          style: { color: "black", fontSize: "24px" },
-        });
-      }
-    } catch (error) {
-      toast.error("Your search did not find any campers", {
+      toast.success(`Your search found ${response.total} campers`, {
         position: "bottom-center",
         duration: 3000,
         padding: "10px",
-        style: { color: "black", fontSize: "24px" },
+        style: { color: "black", fontSize: "24px", border: "2px solid green" },
+      });
+    } catch (error) {
+      toast.error("Sorry, your search did not find any campers", {
+        position: "bottom-center",
+        duration: 3000,
+        padding: "10px",
+        style: { color: "black", fontSize: "24px", border: "2px solid red" },
       });
     }
   };
