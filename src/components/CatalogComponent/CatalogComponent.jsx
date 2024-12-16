@@ -12,6 +12,7 @@ import {
   selectCurrentPage,
 } from "../../redux/camper/selectors";
 import { selectFilters } from "../../redux/filter/slice";
+import { Triangle } from "react-loader-spinner";
 
 const CatalogComponent = () => {
   const dispatch = useDispatch();
@@ -42,8 +43,20 @@ const CatalogComponent = () => {
     <div className={css.page}>
       <div className={css.container}>
         <Filter />
-        {isLoading && <p>Is Loading...</p>}
-        <CatalogList items={campers} />
+        <div>
+          {isLoading && (
+            <Triangle
+              visible={true}
+              height="80"
+              width="80"
+              color="#e44848"
+              ariaLabel="triangle-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          )}
+          <CatalogList items={campers} />
+        </div>
       </div>
       {!isLastPage && (
         <button

@@ -5,7 +5,7 @@ const filtersSlice = createSlice({
   initialState: {
     location: "",
     equipment: [],
-    form: "panelTruck",
+    form: "",
   },
   reducers: {
     setFilters: (state, action) => {
@@ -17,7 +17,7 @@ const filtersSlice = createSlice({
     resetFilters: () => ({
       location: "",
       equipment: [],
-      form: "panelTruck",
+      form: "",
     }),
   },
 });
