@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentCamper } from "../../redux/camper/selectors";
 import { useEffect } from "react";
 import { getCampersById } from "../../redux/camper/operations";
+import { Triangle } from "react-loader-spinner";
 
 const activePage = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
@@ -23,6 +24,22 @@ const CamperComponent = () => {
       dispatch(getCampersById(camperId));
     }
   }, [dispatch, params.id]);
+
+  if (!currentCamper || Object.keys(currentCamper).length === 0) {
+    return (
+      <div className={css.page}>
+        <Triangle
+          visible={true}
+          height="80"
+          width="80"
+          color="#e44848"
+          ariaLabel="triangle-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={css.page}>
